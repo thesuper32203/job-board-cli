@@ -2,7 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-C:\Users\Thesu\IdeaProjects\job_posting_CLI\src\main\java\org\example\jobapp\api\AdzunaApiKey.java
+src/main/java/org/example/jobapp/api/AdzunaApiKey.java
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
