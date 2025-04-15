@@ -6,6 +6,7 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Scanner;
 
 public class AdzunaClient {
 
@@ -32,6 +33,9 @@ public class AdzunaClient {
             //fetch the api response based on api link
             HttpURLConnection client = fetchApiResponse(url);
 
+            //read the response and convert store string type
+            String response = readApiResponse(apiConnection);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -57,6 +61,28 @@ public class AdzunaClient {
             throw new RuntimeException(e);
         }//could not make connection
 
+    }
+
+    public String readApiResponse(HttpURLConnection api){
+        try{
+            //create a string builder to store the resulting json data
+            StringBuilder resultJson = new StringBuilder();
+
+            //create a scanner to read from the InputStream of the HttpURLConnection
+            Scanner scan = new Scanner(api.getInputStream());
+
+            //loop through each line in the response and append it to the StringBuilder
+            while(scan.hasNext()){
+                //read and append the current line to the StringBuilder
+                resultJson.append(scan.nextLine());
+            }
+
+            //close the sacnner to release resources associate with it
+            scan.close();
+            return resultJson.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getURL(){
